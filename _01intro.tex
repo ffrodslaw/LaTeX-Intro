@@ -1,0 +1,233 @@
+\subsection{What is \LaTeX{}?}
+
+\begin{itemize}
+\item \LaTeX{} (or LaTeX) is pronouned ``lay-teck'', not ``latex''
+
+\item \LaTeX{} is a standard open-source, document preparation system used for any kind of technical or academic writing. It is especially useful for typesetting math.
+
+\item In contrast to Microsoft Word, \LaTeX{} is not WYSIWYG (what you see is what you get), but WYSIWYM (what you see is what you mean). What that means will become a bit clearer once we write our first document.
+
+\item Files are all text and PDF. There are no compatibility issues across operating systems or version. \LaTeX{} is available for Linux, Mac, and Windows. For free!
+
+\item You can prepare all kinds of documents with it: articles, presentation slides, books, posters, CVs, letters, lecture notes (if you're so inclined.)
+
+\item Depending on your handwriting, using \LaTeX{} will make your TAs very happy.
+
+\end{itemize}
+
+\subsection{Installation}
+
+Please make sure you have \LaTeX{} installed on your personal machine.
+
+\paragraph{Linux} Use your software manager or terminal to install \TeX{}Live. For example, on Ubuntu use the command
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install texlive-full
+\end{lstlisting}
+
+\paragraph{Mac} On a Mac OS X machine you'll want to use Mac\TeX{}. You can download the installer at \url{http://www.tug.org/mactex/}. 
+
+\paragraph{Windows} On Windows the standard is MiK\TeX{}. Download it from \url{http://www.miktex.org/download}.
+
+In addition to the \LaTeX{} engine, you will want an editor for it. There are dozens of options and the choice is often very personal.  Some editors that people seem to like are \TeX{}studio, \TeX{}maker, Sublime Text, Emacs, or Atom. Choose one you like and download the version for your operating system. I will be using \TeX{}maker which you can download at \url{http://www.xm1math.net/texmaker/download.html}.
+
+\subsection{First document}
+
+Now let's write our first ever \LaTeX{} document. Open up your editor of choice and type the following.
+
+\begin{lstlisting}
+\documentclass{article} %tell it what kind of thing we're writing.
+%Use article unless you're doing something fancy
+\begin{document}
+This is my first document using \LaTeX.
+\LaTeX\ is                  fun.
+``And now the time has come,'' the Walrus said, ``to talk of many things.
+Of shoe and ships and sealing wax, of cabbages and kings.''
+
+This is a new paragraph
+\end{document}
+\end{lstlisting}
+
+Before creating our output document, let's save the code we just wrote as ``Test.tex''. \texttt{tex} is the extension of all text files written in \TeX{}. Once we have saved the file, we can compile it (process it with the \LaTeX{} engine) by clicking Tools $>$ Build (or similar depending on the editor).
+
+A few things to note about our document:
+
+\begin{itemize}
+\item First, \% is how we generate comments. These are remarks that we want to leave for ourselves or others if the source file, but that we don't want to show up in the actual document. You can imagine having part of a document that you're not sure if you want to include. Rather than move it or delete it, you can simply comment it away and reinstate it as needed.
+\item Another thing to note is that the only text to appear in the document is what is between the commands begin and end document. This is no coincidence. Everything above \verb|\begin{document}| is about setting up the document. In this case it just means telling it we want to write an article, but we'll add things here as we go. Everything below \verb|\end{document}| is just ignored by the compiler. This another place to hide text you're not sure if you want to include.
+\item Looking back at our example you'll also notice that white space doesn't matter much. Extra spaces and line breaks do not have an effect on the output. This allows you some liberty to structure your text in the source file in a way that is most readable to you.
+
+\item Another thing to notice is the use of quotation marks. This is something that often confuses novice users. The double quote mark `` (shift-') produces quotes that only curve one direction (same for single quotes from that key).
+\end{itemize}
+
+\subsection{Special characters}
+
+For writing your \texttt{.tex} file you will only include the characters on your keyboard. Every special character such as %$\oiiintctrclockwise$ and \faStarHalfO will need to be represented by a combination of characters on your keyboard.
+
+The following characters are special: \verb|% # $ ^ & _ { } ~ \|. They mean something specific to \LaTeX{}, so if you type for example ``\%'' in your text file, you won't see it in the output. 
+All \LaTeX{} commands start with a \verb|\|. Most of the special characters can be displayed by attaching a backlash to them. So in order to type a percentage sign, you need to type \verb|\%| in your \texttt{.tex} file.
+
+\subsection{Basic tweaks}
+
+By default \LaTeX{} uses single spacing, 10pt font, and rather large margins. If you want your document to look differently, it's easy to change these things.
+
+\subsubsection*{Font size}
+
+To change to change the font size in your document, simply alter the first line of our code in which we define the document class.
+
+\begin{lstlisting}
+\documentclass[11]{article}
+\end{lstlisting}
+
+\subsubsection*{Margins}
+
+To adjust the margins we will use our first package. Packages are add-ons to \LaTeX{} for increased functionality. There are hundreds of them for a variety of uses. For margins we will use the \texttt{geometry} package.
+
+\begin{lstlisting}
+\documentclass[11]{article}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\end{lstlisting}
+
+Note that we include packages before the start of the ``actual'' document, in the \textit{header} of our \texttt{tex} file.
+
+\subsubsection*{Spacing}
+
+Double or 1.5 spacing often can make papers more readable. We can use the \texttt{setspace} package to adjust our header.
+
+\begin{lstlisting}
+\documentclass[11]{article}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{setspace}
+\doublespacing %for 1.5 spacing use \onehalfspacing
+\end{lstlisting}
+
+Other notable commands for spacing are:
+\begin{itemize}
+\item Two or more carriage returns (enter keys), \verb|\\|, and \verb|\linebreak| will move all following text to a new line. A single carriage return will produce a non-breaking space.
+
+\item The special character \verb|~| also produces a non-breaking space.
+
+\item \verb|\par| will create a new paragraph for the following text.
+
+\item \verb|\linebreak| and \verb|\pagebreak| move all following text to the next line and page respectively.
+
+\item Any number of consecutive spaces are treated as a single space.
+\end{itemize}
+
+\subsection{List Environments}
+
+You can create lists of items, numbering, or descriptions.
+
+\begin{lstlisting}
+\documentclass[11]{article}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{setspace}
+\doublespacing
+\begin{document}
+This is my first document using \LaTeX.
+\LaTeX\ is                  fun.
+``And now the time as come,'' the Walrus said, ``to talk of many things.
+Of shoe and ships and sealing wax, of cabbages and kings.''
+
+This is a new paragraph. Here is a list of animals
+\begin{itemize}
+	\item Ant
+	\item Elephant
+	\item Lizard
+\end{itemize}
+\end{document}
+\end{lstlisting}
+
+It's easy to do it with numbers instead. Simply replace \texttt{itemize} with \texttt{enumerate}. Remember to do this at the beginning and at the end of the environment. The \verb|\item| command remains the same.
+
+\begin{lstlisting}
+\documentclass[11]{article}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{setspace}
+\doublespacing
+\begin{document}
+This is my first document using \LaTeX.
+\LaTeX\ is                  fun.
+``And now the time as come,'' the Walrus said, ``to talk of many things.
+Of shoe and ships and sealing wax, of cabbages and kings.''
+
+This is a new paragraph. Here is a list of animals
+\begin{enumerate}
+	\item Ant
+	\item Elephant
+	\item Lizard
+\end{enumerate}
+\end{document}
+\end{lstlisting}
+
+We can nest lists and alternate between them:
+
+\begin{lstlisting}
+\documentclass[11]{article}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{setspace}
+\doublespacing
+\begin{document}
+This is my first document using \LaTeX.
+\LaTeX\ is                  fun.
+``And now the time as come,'' the Walrus said, ``to talk of many things.
+Of shoe and ships and sealing wax, of cabbages and kings.''
+
+This is a new paragraph. Here is a list of animals
+\begin{enumerate}
+	\item Ant
+	\item Elephant
+	\begin{itemize}
+		\item Asian Elephant
+			\begin{enumerate}
+				\item Sri Lankan elephant
+			\end{enumerate}
+	\item African Elephant
+	\item Mammoth
+	\end{itemize}
+	\item Lizard
+\end{enumerate}
+\end{document}
+\end{lstlisting}
+
+The description environment is a bit different as it requires labels which replace the bullets or numbers.
+
+\begin{lstlisting}
+\documentclass[11]{article}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{setspace}
+\doublespacing
+\begin{document}
+This is my first document using \LaTeX.
+\LaTeX\ is                  fun.
+``And now the time as come,'' the Walrus said, ``to talk of many things.
+Of shoe and ships and sealing wax, of cabbages and kings.''
+
+This is a new paragraph. Here is a list of animals
+\begin{description}
+	\item[Ant]
+	\item[Elephant] Some elephants include
+	\begin{itemize}
+		\item Asian Elephant
+			\begin{enumerate}
+				\item Sri Lankan elephant
+			\end{enumerate}
+	\item African Elephant
+	\item Mammoth
+	\end{itemize}
+	\item[Lizard]
+\end{description}
+\end{document}
+\end{lstlisting}
+
+\subsection{Getting help}
+
+Especially in the beginning (but even if you're a pro!), you will run into problems in your code. You either don't know how to do a specific thing in \LaTeX{} or you get an error message when your code won't compile. Google is your friend! Searching for ``how to do [xyz] in latex'' or searching for a meaningful portion of the error message will help you in nearly all cases. Some websites that are especially helpful are:
+
+\begin{itemize}
+\item \url{http://mirror.unl.edu/ctan/info/symbols/comprehensive/symbols-a4.pdf}. This PDF is a very comprehensive lists of symbols and how they can be reproduced in \LaTeX{}- Note that all of them require you to load a special package.
+\item \url{http://detexify.kirelabs.org/classify.html} is a website where you can draw a symbol that you're trying to reproduce and it tries to find it. There are also Android/iOS apps that work similarly.
+\item \url{https://en.wikibooks.org/wiki/LaTeX} is a good source with examples for basic things.
+\end{itemize}
+
+Feel free to also ask me for help if you can't find it on the internet. My general advice is to comment out (with \verb|%|) large portions of the text if you run into compiling issues. If your document compiled before, comment out all changes you have made since then and gradually introduce your previous changes until you find the line of code that prevents \LaTeX{} from compiling. The default error messages may give you the line at which it fails but often they are not very useful.

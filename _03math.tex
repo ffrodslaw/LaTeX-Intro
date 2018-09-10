@@ -1,0 +1,264 @@
+Let's create a new document to learn how to include math in \LaTeX{}. Create the necessary header so that it compiles and include this in the preamble \verb|\usepackage{amsmath, amsfonts, amsthm}|. Now you can follow along and compile as we go.
+
+\subsection{Basic math}
+ 
+The most basic way to type math is in-line math. We simply use the dollar sign to enter math mode. Note that either \verb|$ $| or \verb|\( \)| can be used to enter math mode. For example, \verb|$2+2=4$| produces $2+2=4$.
+
+There are a lot of special operators that you can only use in math mode. For example, we can write \verb|$x = \log(\exp(x))$| to get $x = \log(\exp(x))$. Below is a table of very common math commands.
+
+\begin{table}[h]
+	\centering
+	\caption{Useful operators}
+	\label{tab:operators}
+\begin{footnotesize}
+    \begin{tabular}{l l}
+      \hline
+      Command     & Outcome \\ \hline
+      \verb|\exp| & $\exp$\\
+\verb|\log| & $\log$ \\
+\verb|\ln| & $ln$ \\
+\verb|\sqrt{x}| & $\sqrt{x}$ \\
+\verb|\sin| & $\sin$ \\\
+\verb|\tan| & $\tan$ \\
+\verb|\cos| & $\cos$\\
+\verb|\sum| & $\sum$\\
+\verb|\prod| & $\prod$\\
+\verb|\min| & $\min$\\
+\verb|\max| & $\max$\\
+\verb|\int| & $\int$ \\
+\verb|\partial| & $\partial$ \\
+\verb|\lim| & $\lim$ \\
+\verb|\vee| & $\vee$ \\
+\verb|\wedge| & $\wedge$ \\
+\verb|\cup| & $\cup$ \\
+\verb|\cap| & $\cap$ \\
+\verb|\to| & $\to$ \\
+\verb|\cdot| & $\cdot$ \\
+\verb|\times| & $\times$ \\
+\verb|\implies| & $\implies$ \\
+\verb|\in| & $\in$ \\
+\verb|\setminus| & $\setminus$ \\
+\verb|\geq| & $\geq$ \\
+\verb|\leq| & $\leq$ \\
+\verb|\neq| & $\neq$ \\
+\verb|\infty| & $\infty$ \\
+\verb|\emptyset| & $\emptyset$ \\
+\hline
+    \end{tabular}
+\end{footnotesize} 
+\end{table}
+
+We can also declare new operators in our preamble by using the function \verb|\DeclareMathOperator{\var}{var}|. This gives us a new command \verb|\var| that produces a plain text version of the variance operator. Compare
+
+\begin{align*}
+\var(x) &= \sigma^2 \\
+var(x) &= \sigma^2
+\end{align*}
+
+where the top one is our new operator. We can also produce plain text words in math mode by using \verb|\text{text}|.
+
+Writing all math in-line can make your text cramped and hard to read, so you likely want to mix it up with display math. You can use either \verb|$$ $$| or \verb|\[ \]| to enter display math. Switching to display you go from $f(x) = \exp(x)$ to $$f(x) = \exp(x)$$
+
+In a lot of cases you will want to do this to style, ease of reading, and to emphasize important steps or results.
+
+To add subscripts and superscripts to variables we use the underscore (\verb|_|) and the carrot (\verb|^|). For example, if we want to sum $x_i^2$ from $i=1$ to $N$, we write \verb|\sum_{i=1}^N x_i^2|. Note that we use subscript and superscript on the summation operator to set the bounds on the operation. The inline output is $\sum_{i=1}^N x_i^2$ and the display output is $$\sum_{i=1}^N x_i^2\ $$
+
+Notice that with the bounds on the operator, there is a cosmetic difference between the display and the inline presentations. The other thing to note is the use of \verb|{i=1}| to tell the software that the whole segment is the subscript. Omitting the braces is a common mistake with obvious results
+ 
+$$\sum_i=1^N x_i^2$$ 
+
+Fractions are easy to implement. We simply use \verb|\frac{num}{den}| to have the top and bottom parts. Inline this gives us $\frac{x}{y}$ and display $$\frac{x}{y}\ .$$
+
+While we're looking at fractions, let's consider the following issue.
+
+\begin{lstlisting}
+$$ \frac{1}{N} (\sum_{i=1}^N \log(f(\theta|y_i))) + (1-\frac{1}{p})X $$
+\end{lstlisting}
+which produces
+$$\frac{1}{N} (\sum_{i=1}^N \log(f(\theta|y_i))) + (1-\frac{1}{p})X\ .$$
+
+Look at those terrible parentheses. Unfortunately, \LaTeX{} doesn't adjust the height of them automatically, so we have to do it ourselves:
+
+\begin{lstlisting}
+$$ \frac{1}{N} \left(\sum_{i=1}^N \log(f(\theta|y_i))\right) + \left(1-\frac{1}{p}\right)X $$
+\end{lstlisting}
+which gives us
+$$\frac{1}{N} \left(\sum_{i=1}^N \log(f(\theta|y_i))\right) + \left(1-\frac{1}{p}\right)X\ .$$
+
+This also works for brackets and curly braces. However, because braces are special they are written with \verb|\left\{  \right\}|.
+
+Binomials (the choose function) works the same way as fractions. Just replace \texttt{frac} with \texttt{binom} to get
+$$\binom{1}{4}\ .$$
+
+Greek letters are also important. The command for them simply is a backslash and the name of the letter. This means that $\theta$ is \verb|\theta| and capitals like $\Theta$ is with a capital letter, \verb|\Theta|.
+
+
+\subsection{Fancy equations}
+
+You might want to use numbered equations to draw attention to important results. To get equations with numbers we can use the \texttt{equation} environment.
+
+\begin{lstlisting}
+\begin{equation}\label{eq:exp}
+F(t) = 1 - \exp(-\lambda t)
+\end{equation}
+\end{lstlisting}
+
+which produces 
+\begin{equation}\label{eq:exp}
+F(t) = 1 - \exp(-\lambda t)\ .
+\end{equation}
+
+Note that the use of the label command works exactly like it did with figures and tables so we can refer to Equation \ref{eq:exp} by using \verb|\ref{eq:exp}|.
+
+Being able to line up multiple equations creates a nice clean visual effect. The \texttt{align} environment provides a system for doing that. The code
+
+\begin{lstlisting}
+\begin{align*}
+F(t) &= 1- \exp(-\lambda t)\\
+F(0) &= 1-\exp(0)\\
+     &= 0.
+\end{align*}
+\end{lstlisting}
+
+Notice that this combines a few things we have done so far. The \* removes numbers, just like it did with sections, while the \& is what lines equations up and the \textbackslash\textbackslash breaks the line, just like with tables. If we remove the \* we get equation numbers for each line that can be assigned labels.
+
+Piecewise functions are also important. The \texttt{case} environment inside math mode helps us here.
+
+\begin{lstlisting}
+$$
+f(t) =
+\begin{cases}
+	1 - \exp(-\lambda t) & \text{if } t >0 \\
+	0                    & \text{otherwise.}
+\end{cases}
+$$
+\end{lstlisting}
+
+The code produces
+
+$$
+f(t) =
+\begin{cases}
+	1 - \exp(-\lambda t) & \text{if } t >0 \\
+	0                    & \text{otherwise.}
+\end{cases}
+$$
+
+Notice the use of \verb|\text{}| to produce normal-looking text inside math. Also notice that I included the space after ``if'' because math mode otherwise runs things together without spaces.
+
+\subsection{Matrices}
+
+At some point you may find yourself with the inevitable task of writing a matrix. Here's how you would do that.
+
+\begin{lstlisting}
+$$
+A =
+\begin{bmatrix*}
+	a_{11} & a_{12} \\
+	a_{21} & a_{22} \\
+\end{bmatrix*}
+$$
+\end{lstlisting}
+
+And this gives you 
+$$
+A =
+\begin{bmatrix*}
+a_{11} & a_{12} \\
+a_{21} & a_{22} \\
+\end{bmatrix*}
+$$
+
+The \texttt{b} in \texttt{bmatrix} refers to the brackets. You can also use parentheses. For instance
+
+$$
+A =
+\begin{pmatrix}
+	a_{1,1} & a_{1,2} & \ldots & a_{1,n} \\
+	a_{2,1} & a_{2,2} & \ldots & a_{2,n} \\
+	\vdots & \vdots   & \ddots & \vdots \\
+	a_{m,1} & a_{m,2} & \ldots & a_{m,n}  \\
+\end{pmatrix}
+$$
+
+is made by
+
+\begin{lstlisting}
+$$
+A =
+\begin{pmatrix}
+	a_{1,1}	& a_{1,2} & \ldots & a_{1,n} \\
+	a_{2,1} & a_{2,2} & \ldots & a_{2,n} \\
+	\vdots 	& \vdots  & \ddots & \vdots \\
+	a_{m,1} & a_{m,2} & \ldots & a_{m,n} 
+\end{pmatrix}
+$$
+\end{lstlisting}
+
+\subsection{Theorems and proofs}
+
+The \texttt{theorem} and \texttt{proof} environments are the basis for most formal theoretical analysis. You setup these enviroments by declaring theorems in your preamble. 
+
+\begin{lstlisting}
+\newtheorem{thm}{Theorem}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\end{lstlisting}
+
+The code defines four environments that we can use. Let's go ahead and write a theorem with the following.
+
+\begin{lstlisting}
+\begin{thm}\label{th:subsets}
+If $A$ is a subset of $B$ and $B$ is a subset of $C$ then $A$ is a subset of $C$.
+\end{thm}
+\end{lstlisting}
+
+\begin{thm}\label{th:subsets}
+If $A$ is a subset of $B$ and $B$ is a subset of $C$ then $A$ is a subset
+of $C$.
+\end{thm}
+
+Now we have the statement of Theorem \ref{th:subsets}. For the proof we use the \texttt{proof} environment.
+
+\begin{lstlisting}
+\begin{proof}
+Left as an exercise to the reader.
+\end{proof}
+\end{lstlisting}
+
+\begin{proof}
+Left as an exercise to the reader.
+\end{proof}
+
+\subsection{Fancy fonts}
+
+Table \ref{tab:fonts} shows some additional things you may want to use in math mode.
+
+\begin{table}[h]
+	\centering
+	\label{tab:fonts}
+	\caption{Fonts in math mode}
+\begin{small}
+  \begin{center}
+    \begin{tabular}{c c c}
+      \hline
+Command & Use & Example \\ \hline
+\verb|\mathbb{}| & Blackboard & $\mathbb{R}$ is used to denote real numbers.\\
+\verb|\mathbf{}| & Boldface & $\mathbf{X}$ bold is sometimes used for matrices.\\
+\verb|\mathfrak{}| & Fraktur & $\mathfrak{R}$ is also sometimes used to denote real numbers.\\
+\verb|\hat{}| & Add a hat to a variable & $\hat{\theta}$ is an estimate of $\theta$.\\
+\verb|\tilde{}| & Add a tilde & $\tilde{\theta}$ is sometimes used to denote a specific value of $\theta$.\\
+\verb|\bar{}| & Add a bar & $\bar{x}$ is often used to denote the mean of $x$.\\
+
+
+
+      \hline
+    \end{tabular}
+  \end{center}
+\end{small}
+\end{table}
+
+
+
+\subsection{Exercise} 

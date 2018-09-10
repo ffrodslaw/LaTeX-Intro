@@ -1,0 +1,34 @@
+\select@language {english}
+\contentsline {section}{\numberline {I}Introduction and Basics}{3}{section.1}
+\contentsline {subsection}{\numberline {1}What is \LaTeX {}?}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {2}Installation}{3}{subsection.1.2}
+\contentsline {paragraph}{Linux}{3}{section*.3}
+\contentsline {paragraph}{Mac}{3}{section*.4}
+\contentsline {paragraph}{Windows}{3}{section*.5}
+\contentsline {subsection}{\numberline {3}First document}{4}{subsection.1.3}
+\contentsline {subsection}{\numberline {4}Special characters}{4}{subsection.1.4}
+\contentsline {subsection}{\numberline {5}Basic tweaks}{5}{subsection.1.5}
+\contentsline {subsection}{\numberline {6}List Environments}{6}{subsection.1.6}
+\contentsline {subsection}{\numberline {7}Getting help}{8}{subsection.1.7}
+\contentsline {section}{\numberline {II}Tables, figures, footnotes, etc.}{8}{section.2}
+\contentsline {subsection}{\numberline {8}Tables}{8}{subsection.2.8}
+\contentsline {subsection}{\numberline {9}Figures}{10}{subsection.2.9}
+\contentsline {subsection}{\numberline {10}Footnotes and endnotes}{11}{subsection.2.10}
+\contentsline {subsection}{\numberline {11}Abstract and titles}{12}{subsection.2.11}
+\contentsline {subsection}{\numberline {12}Sections}{12}{subsection.2.12}
+\contentsline {subsection}{\numberline {13}Advanced tweaks}{13}{subsection.2.13}
+\contentsline {section}{\numberline {III}Typing math}{14}{section.3}
+\contentsline {subsection}{\numberline {14}Basic math}{14}{subsection.3.14}
+\contentsline {subsection}{\numberline {15}Fancy equations}{16}{subsection.3.15}
+\contentsline {subsection}{\numberline {16}Matrices}{17}{subsection.3.16}
+\contentsline {subsection}{\numberline {17}Theorems and proofs}{18}{subsection.3.17}
+\contentsline {subsection}{\numberline {18}Fancy fonts}{18}{subsection.3.18}
+\contentsline {subsection}{\numberline {19}Exercise}{18}{subsection.3.19}
+\contentsline {section}{\numberline {IV}Presentations with beamer}{18}{section.4}
+\contentsline {subsection}{\numberline {20}Theme and colors}{19}{subsection.4.20}
+\contentsline {subsection}{\numberline {21}Frames}{20}{subsection.4.21}
+\contentsline {subsection}{\numberline {22}Appendix slides and references}{22}{subsection.4.22}
+\contentsline {section}{\numberline {V}Managing citations with \hologoRobust {BibTeX}}{22}{section.5}
+\contentsline {subsection}{\numberline {23}Manually adding references}{22}{subsection.5.23}
+\contentsline {subsection}{\numberline {24}Bibliography management}{22}{subsection.5.24}
+\contentsline {subsection}{\numberline {25}\LaTeX {} with \hologoRobust {BibTeX}}{23}{subsection.5.25}

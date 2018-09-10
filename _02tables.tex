@@ -1,0 +1,248 @@
+Figures and tables are especially important for writing academic papers.
+
+\subsection{Tables}
+
+Let's start with a new document.
+
+\begin{lstlisting}
+\documentclass[11]{article}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{setspace}
+\doublespacing
+\begin{document}
+This paper examines important scientific questions.
+It does so in a super rigorous and presents results so well-identified that they can't grab a bite without being spotted.
+We address all the important concerns with our results and can say with absolute certainty that we have created the last word on this topic.
+
+In this paragraph we want to say just a little more about what a big deal
+the paper is.
+This paper advances all of science by about 25 years.
+In fact, we have produced 200\% more science than anyone else writing on this topic.
+\end{document}
+\end{lstlisting}
+
+Let's add a table.
+
+\begin{lstlisting}
+\documentclass[11]{article}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{setspace}
+\doublespacing
+\begin{document}
+This paper examines important scientific questions.
+It does so in a super rigorous and presents results so well-identified that they can't grab a bite without being spotted.
+We address all the important concerns with our results and can say with absolute certainty that we have created the last word on this topic.
+
+In this paragraph we want to say just a little more about what a big deal
+the paper is.
+This paper advances all of science by about 25 years.
+In fact, we have produced 200\% more science than anyone else writing on this topic.
+
+
+\begin{table}[h]
+	\centering
+	\caption{Table of stuff}
+	\label{tab:Stuff}
+	\begin{tabular}{rc|l}
+		\hline
+		Input 1	& Input 2	& Sum \\ \hline
+		5 		& 10 		& 15 \\
+		2 		& 9 		& 11 \\ \hline
+	\end{tabular}
+\end{table}
+
+Table \ref{tab:Stuff} shows just all the cool science we do.
+\end{document}
+\end{lstlisting}
+
+What does it all mean?
+
+\begin{itemize}
+\item The entire table is between the \verb| \begin{table} ... \end{table}| commands. The \texttt{[h]} tells it we want the table placed ``here.'' This is just a suggestion as the software will place it where it thinks is best. Other options include \texttt{b} for bottom, \texttt{t} for top, and \texttt{p} for separate page. We use the centering command to center the table. I then gave it a caption and a label. You should always give your tables a caption because that tells the reader what's going on in the table. The label is for you to use to refer to the table within your document. We use the \verb|\ref| command to refer to the table in the text. This means that we never have to manually number or adjust the numbers. Quick note is that we can move caption and label to below the tabular commands and this
+moves the caption to below the table, but label has to come after caption.
+
+\item After this we get to the tabular section. This is where the actual table happens. The first thing after we open with \verb|\begin{tabular}| is that we specify \texttt{rc|l}. This tells the software two
+things: First, it tells it there will be three columns (number of letters is the number of
+columns). The second thing is how to justify the text within each column with \texttt{r}, \texttt{c}, and \texttt{l} meaning right, center, and left, respectively. The pipe, | says to put a vertical line between these two columns. We use \verb|\hline| to create horizontal lines after a row, \verb|\\| to end rows, and \verb|&| to separate columns. Everything else is just the text.
+\end{itemize}
+
+Something that often comes in handy is merging cells together. We can do that with the \texttt{multicolumn} command. It takes three arguments. The first is how many columns to take up, the second is the alignment, and the third is the text.
+
+\begin{lstlisting}
+[...]
+
+\begin{table}[h]
+	\centering
+	\caption{Table of stuff}
+	\label{tab:Stuff}
+	\begin{tabular}{rc|l}
+		\hline
+		Input 1	& Input 2	& Sum \\ \hline
+		5 		& 10 		& 15 \\
+		2 		& 9 		& 11 \\ \hline
+		\multicolumn{3}{l}{here's a remark.}
+	\end{tabular}
+\end{table}
+
+[...]
+\end{lstlisting}
+
+\subsection{Figures}
+
+Incorporating figures is very similar to tables. We are going to use the \texttt{graphicx} package.
+
+\begin{lstlisting}
+\documentclass[11]{article}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{setspace}
+\doublespacing
+\usepackage{graphicx}
+
+[...]
+
+Table \ref{tab:Stuff} shows just all the cool science we do. \ref{fig:plots} graphs some other stuff.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{3dPlots.pdf}
+\caption{Some plots}
+\label{fig:plots}
+\end{figure}
+
+[...]
+\end{lstlisting}
+
+\begin{itemize}
+
+\item The external files you import will have to be either \texttt{.jpg}, \texttt{.png}, or \texttt{.pdf}. Place the files in the same directory as your \texttt{.txt} file.
+
+\item Figures start the same as tables with a begin and
+an end and they use the same placement indicators. To actually include the figure we use the command \verb|\includegraphics[options]{name}|. In the options we tell the software to scale the picture. We can scale it by including \\ \verb|width=0.5\columnwidth| to get it to take half the page. Or we can scale the whole image by a fraction by using scale as in \verb|\includegraphics[scale=.9]{name}|. 
+
+\item The file of the image goes in the brackets. It needs to be the fixed or relative path to the image. There should
+be no spaces in the name of the image either. Like with tables we caption and label to identify them.
+
+\item The \verb|\centering| command and the \texttt{figure} environments are optional. The \texttt{figure} environment is another float (like the \texttt{table} environment). It creates a ``container'' for your image, and again, allows you to title and number the image using the \verb|\caption{}| command.
+
+\end{itemize}
+
+
+\subsection{Footnotes and endnotes}
+
+We often may want to include things that are important but may interrupt the flow of the text. That's when we use footnotes. 
+
+\begin{lstlisting}
+[...]
+
+That figure sure was a pretty.\footnote{The prettiness of the figure was rated as 7.9 on the princess beauty scale.}
+
+[...]
+\end{lstlisting}
+
+If you instead want end notes, you can simply use \verb|\endnote{}| instead. Note that you need to load the \texttt{endnotes} package as well.
+
+\subsection{Abstract and titles}
+
+Every academic paper you write should have an abstract and a title page. The actual title will be printed by the command \verb|\maketitle|. However, we need to supply \LaTeX{} with information on the title, author, and date.
+
+\begin{lstlisting}
+\documentclass[11]{article}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{graphicx}
+\usepackage{setspace}
+\onehalfspacing
+
+% % New % %
+\title{On the Making of Science}
+\author{Bullwinkle J. Moose\thanks{Ph.D. Candidate, Moose Institute for Toetapping.}}
+\date{\today}
+% % % % %
+
+\begin{document}
+
+\maketitle
+\newpage
+
+[...]
+\end{lstlisting}
+
+To add an abstract, we simply can use the \texttt{abstract} environment before the page break.
+
+\begin{lstlisting}
+[...]
+
+\maketitle
+\begin{abstract}
+This paper does stuff
+\end{abstract}
+
+\newpage
+
+[...]
+\end{lstlisting}
+
+
+\subsection{Sections}
+
+Each document class comes with a built-in hierarchy and set of sub-headings. The \texttt{article} class allows the following sub-headings, in the following order: \verb|\part{}|, \verb|\section{}|, \verb|\subsection{}|, \verb|\subsubsection{}|, \verb|\paragraph{}|, \verb|\subparagraph{}|. If an ``*'' is placed after the subheading name, such as \verb|\part*{}|, then the heading will not be numbered. 
+
+\subsection{Advanced tweaks}
+
+\subsubsection*{Font styles and sizes} 
+
+To change the font style or size you either use an the environment approach or the command approach. By the first approach, the text contained within the environment will be in a different font style or size. By the second approach, only the text included as the mandatory argument to the command will be altered.
+
+Examples of font styles are \textbf{bold face} and \textsc{small caps}. How to express the most common font styles is summarized below.
+
+\begin{table}[h]
+	\centering
+	\caption{Font styles}
+	\label{tab:fontstyles}
+\begin{small}
+    \begin{tabular}{c c c}
+      \hline
+      Style               & Environment                                                                          & Command \\
+      \hline
+      normal/default      & \texttt{\textbackslash begin\{textnormal\} \ldots \textbackslash end\{textnormal\}}  & \texttt{\textbackslash textnormal\{\ldots \}}\\
+      \textbf{bold}        & \texttt{\textbackslash begin\{bf\} \ldots \textbackslash end\{bf\}}  & \texttt{\textbackslash textbf\{\ldots \}}\\
+      \textit{italics}     & \texttt{\textbackslash begin\{it\} \ldots \textbackslash end\{it\}}  & \texttt{\textbackslash textit\{\ldots \}}\\
+      \textsc{SmallCaps}   & \texttt{\textbackslash begin\{sc\} \ldots \textbackslash end\{sc\}}  & \texttt{\textbackslash textsc\{\ldots \}}\\
+      \underline{underline}&                                none  :-(                             & \texttt{\textbackslash underline\{\ldots \}}\\
+      \textrm{Roman}       & \texttt{\textbackslash begin\{textrm\} \ldots \textbackslash end\{textrm\}}  & \texttt{\textbackslash textrm\{\ldots \}}\\
+      \textsf{Sans Serif}  & \texttt{\textbackslash begin\{textsf\} \ldots \textbackslash end\{textsf\}}  & \texttt{\textbackslash textsf\{\ldots \}}\\
+      \texttt{teletype}    & \texttt{\textbackslash begin\{tt\} \ldots \textbackslash end\{tt\}}  & \texttt{\textbackslash texttt\{\ldots \}}\\
+      \hline
+    \end{tabular}
+\end{small}
+\end{table}
+
+Similarly, you can use change font size with 10 different declarations. Note that these sizes are always relative to the default font size that you specified in the header.
+
+\begin{table}[h]
+	\centering
+	\caption{Font sizes}
+	\label{tab:fontsizes}
+\begin{small}
+    \begin{tabular}{c c c}
+      \hline
+      Style               & Environment                                                                 & Command \\
+      \hline
+      \tiny{tiny}         & \texttt{\textbackslash begin\{tiny\} \ldots \textbackslash end\{tiny\}}      & \texttt{\textbackslash tiny\{\ldots\}}\\
+      \scriptsize{scriptsize} & \texttt{\textbackslash begin\{scriptsize\} \ldots \textbackslash end\{scriptsize\}}      & \texttt{\textbackslash scriptsize\{\ldots\}}\\
+      \footnotesize{footnotesize} & \texttt{\textbackslash begin\{footnotesize\} \ldots \textbackslash end\{footnotesize\}}      & \texttt{\textbackslash footnotesize\{\ldots\}}\\
+      \small{small} & \texttt{\textbackslash begin\{small\} \ldots \textbackslash end\{small\}}      & \texttt{\textbackslash small\{\ldots\}}\\
+      \normalsize{normalsize} & \texttt{\textbackslash begin\{normalsize\} \ldots \textbackslash end\{normalsize\}}      & \texttt{\textbackslash normalsize\{\ldots\}}\\
+      \large{large} & \texttt{\textbackslash begin\{large\} \ldots \textbackslash end\{large\}}      & \texttt{\textbackslash large\{\ldots\}}\\
+      \Large{Large} & \texttt{\textbackslash begin\{Large\} \ldots \textbackslash end\{Large\}}      & \texttt{\textbackslash Large\{\ldots\}}\\
+      \LARGE{LARGE} & \texttt{\textbackslash begin\{LARGE\} \ldots \textbackslash end\{LARGE\}}      & \texttt{\textbackslash LARGE\{\ldots\}}\\
+      \huge{huge} & \texttt{\textbackslash begin\{huge\} \ldots \textbackslash end\{huge\}}      & \texttt{\textbackslash huge\{\ldots\}}\\
+      \Huge{Huge} & \texttt{\textbackslash begin\{Huge\} \ldots \textbackslash end\{Huge\}}      & \texttt{\textbackslash Huge\{\ldots\}}\\
+      \hline
+    \end{tabular}
+\end{small}
+\end{table}
+
+
+\subsubsection*{Colors}
+
+By loading the \texttt{xcolor} package, you can define your own colors or use the vast selection of default shades. It's as simple as \verb|\textcolor{red}{red}| to get \textcolor{red}{red}. Define your own colors by using \verb|\definecolor{name}{model}{color-spec}|. More information on color definition can be found \href{https://www.sharelatex.com/learn/Using_colours_in_LaTeX}{here}.

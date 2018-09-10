@@ -1,0 +1,133 @@
+There are many ways to create slideshows in \LaTeX{} and customize them. We are going to focus on using the \texttt{beamer} package. It is loaded by specifying \texttt{beamer} as the argument to the \verb|\documentclass{}| command in the your preamble.
+
+Let's start by opening a new file and typing the following
+
+\begin{lstlisting}
+\documentclass{beamer}
+\author{Rocket J. Squirrel}
+\institute{Moose Institute for Toetapping}
+\title{Flying Squirrels can’t Actually Fly}
+\date{\today}
+
+\begin{document}
+\frame{\maketitle}
+\end{document}
+\end{lstlisting}
+
+Not much has changed from making papers. Besides the new document class, we have added the \texttt{institute} line. We also have our \texttt{maketitle} command wrapped inside something called a \texttt{frame}. A \texttt{frame} is what \texttt{beamer} calls a slide. When we compile this we get a single slide, which is the title slide.
+
+\subsection{Theme and colors}
+
+Right now, your presentation looks a bit boring. You can tweak the look of it by using \verb|\usebeamertheme| to change the laout and \verb|\usecolortheme| to set the color palette. This \href{http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme_and_color.html}{website} shows various built-in combinations of these two options. For now, we will use the Frankfurt theme and seahorse colors.
+
+\begin{lstlisting}
+\documentclass{beamer}
+\author{Rocket J. Squirrel}
+\institute{Moose Institute for Toetapping}
+\title{Flying Squirrels can’t Actually Fly}
+\date{\today}
+\usetheme{Frankfurt}
+\usecolortheme{seahorse}
+
+\begin{document}
+\frame{\maketitle}
+\end{document}
+\end{lstlisting}
+
+
+\subsection{Frames}
+
+We will now add some slides.
+
+\begin{lstlisting}
+[...]
+
+\begin{document}
+\frame{\maketitle}
+
+% Navigation choices
+\section{Introduction}
+\stepcounter{subsection}
+
+% slide 1
+\begin{frame}{Introduction}
+This is a great presentation.
+
+We will show many things.
+\end{frame}
+
+% slide 2
+\begin{frame}{Introduction (cont.)}
+
+We will show you
+\begin{itemize}
+	\item Great hypotheses
+	\item Exciting results
+\end{itemize}
+\end{frame}
+
+\end{document}
+\end{lstlisting}
+
+We have now created two slides, both of which are part of the introduction section. The call to \texttt{stepcounter} is to tell the software to separate the slides for the navigation bar (the dots at the top in this theme.)
+
+Tables, figures, math, lists, colors, and basically everything else works exactly the same here, so we won't go over them again. Something we have not talked about yet is how to include columns which is probably more popular in presentations than in papers. Columns are just another environment and our new slide will have two columns.
+
+\begin{lstlisting}
+[...]
+
+\begin{document}
+\frame{\maketitle}
+
+% Navigation choices
+\section{Introduction}
+\stepcounter{subsection}
+
+% slide 1
+\begin{frame}{Introduction}
+This is a great presentation.
+
+We will show many things.
+\end{frame}
+
+% slide 2
+\begin{frame}{Introduction (cont.)}
+
+We will show you
+\begin{itemize}
+	\item Great hypotheses
+	\item Exciting results
+\end{itemize}
+\end{frame}
+
+\section{Results}
+\stepcounter{subsection}
+
+% slide 3 with columns
+\begin{frame}{Main Results}
+
+\begin{columns}
+
+\begin{column}{.4\textwidth}
+The main result shows that something happened\\[12pt]
+The second result is unclear
+\end{column}
+
+\begin{column}{.6\textwidth}
+\begin{tabular}{rcc}
+	          & Model 1 & Model 2 \\ \hline
+	$X_1$     & 2.99    & 5.88 \\
+	$X_2$     & -4.50   & 0.23 \\ \hline
+\end{tabular}
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+\end{document}
+\end{lstlisting}
+
+What we did here was open the \texttt{columns} environment and then begin and end one column at a time. For each column we also specified how much of the page it will take.
+
+\subsection{Appendix slides and references}

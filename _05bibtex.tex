@@ -1,0 +1,142 @@
+Finally, we briefly cover the basics of including citations and references in your compiled document with the aid of \hologo{BibTeX}. You can always manually enter references into your document, but the advantages of using \hologo{BibTeX} are considerable.
+
+\begin{enumerate}
+\item \hologo{BibTeX} comes bundles with \LaTeX{}. You don't have to download anything else.
+
+\item In the long run, it will save you a lot of typing.
+
+\item You will not have to type the author, title, date of publication, or page references for the book, article, or unpublished manuscript that you want to cite more than once.
+
+\item \hologo{BibTeX} and \LaTeX{} will format (and re-format) your references according to whichever bibliography style you require.
+\end{enumerate}
+
+\subsection{Manually adding references}
+
+We will not go into the details of how \hologo{BibTeX} works, but we will go through the steps that you must follow to use \hologo{BibTeX} to format your citations. Each \hologo{BibTeX} database is a plain text file, and as with \texttt{.tex} files, you can create a \texttt{.bib} file using any text editor, as long as your references are formatted correctly. For example, within a \texttt{.bib} file, a properly formatted reference for a journal article will look like this:
+
+\begin{lstlisting}
+@Article{Stokes1963,
+	Title = {Spatial Models of Party Competition},
+	Author = {Stokes, Donald E.},
+	Journal = {The American Political Science Review},
+	Year = {1963},
+	Month = {June},
+	Number = {2},
+	Pages = {368--377},
+	Volume = {57},
+	Publisher = {JSTOR}
+}
+\end{lstlisting}
+
+\subsection{Bibliography management}
+
+It will save you time to use reference management software like \texttt{JabRef} which is \href{http://www.jabref.org/}{available} for Linux, Windows, and Mac. It will format your references for you. If you don't already have it, download it now.\footnote{There are various other bibliography management programs that you can use. Another popular choice is \href{https://www.mendeley.com/}{Mendeley} which syncs your bibliography across devices.}
+
+Once it is installed, open it and create a new database.
+\begin{itemize}
+\item Click on the green plus sign and choose what kind of entry you are looking for (book, article, PhD thesis...)
+
+\item Fill in all of the required fields after clicking on the appropriate tab. If you want to include page references or a volume number, you can enter this information under `Optional Fields'.
+
+\item Frequently you can download the \hologo{BibTeX} citation for a published book or journal article direction from the publisher's website. For example, search for Anthony Downs' \textit{The Economic Theory of Democracy} on Google Scholar. By clicking on `Cite', you will be able to easily locate the \hologo{BibTeX} citation. Copy and paste the citation in the `\hologo{BibTeX} Source' tab on JabRef. Click back to the `Required Fields' tab. Now, all of the fields that can be filled out will have been filled for you. Amazing. Now try going to a journal website and downloading the citation for an article of your choice.
+
+\item Once you have filled in all the information, click on the sparkling wand to the bottom left. This will generate a \hologo{BibTeX} key for you which is all the information you will need to cite a reference in your \texttt{.tex} file. The default key pattern is \texttt{author-year}, in our example \texttt{Downs1957}. If you prefer a different one, you can set it yourself in the preferences or manually adjust it.
+
+\item To delete a bibliography entry, simply right-click on it and select `Delete'.
+\end{itemize}
+
+
+\subsection{\LaTeX{} with \hologo{BibTeX}}
+
+Save the bibliography file that you just created in the same folder where you saved the document from Chapter 2. I'm calling my file \texttt{texCourse.bib}. To incorporate \hologo{BibTeX} into our document, we will add one line to our preamble and two lines to the end. Those ending lines set the style of our bibliography (in this case the style of the APSR) and then we direct it to our \texttt{bib} file.
+
+\begin{lstlisting}
+\documentclass[11]{article}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{setspace}
+\doublespacing
+
+\title{On the Making of Science}
+\author{Bullwinkle J. Moose\thanks{Ph.D. Candidate, Moose Institute for Toetapping.}}
+\date{\today}
+
+\usepackage{natbib} %NEW BIBTEX STUFF
+
+\begin{document}
+\maketitle
+\begin{abstract}
+This paper does stuff
+\end{abstract}
+
+\newpage
+
+\section{Introduction}
+This paper examines important scientific questions.
+It does so in a super rigorous and presents results so well-identified that they can't grab a bite without being spotted.
+We address all the important concerns with our results and can say with absolute certainty that we have created the last word on this topic.
+
+In this paragraph we want to say just a little more about what a big deal
+the paper is.
+This paper advances all of science by about 25 years.
+In fact, we have produced 200\% more science than anyone else writing on this topic.
+
+\section{Results}
+\begin{table}[h]
+	\centering
+	\caption{Table of stuff}
+	\label{tab:Stuff}
+	\begin{tabular}{rc|l}
+		\hline
+		Input 1	& Input 2	& Sum \\ \hline
+		5 		& 10 		& 15 \\
+		2 		& 9 		& 11 \\ \hline
+	\end{tabular}
+\end{table}
+
+Table \ref{tab:Stuff} shows just all the cool science we do. fig:plots} graphs some other stuff.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{3dPlots.pdf}
+\caption{Some plots}
+\label{fig:plots}
+\end{figure}
+
+That figure sure was a pretty.\footnote{The prettiness of the figure was rated as 7.9 on the princess beauty scale.}
+
+% BIBTEX STUFF
+\bibliographystyle{apsr}
+\bibliography{texCourse}
+
+\end{document}
+\end{lstlisting}
+
+
+\subsection*{Citing commands}
+
+We're now ready to do some citing. Table \ref{tab:Citations} shows a bunch of different ways to cite.
+
+\begin{table}[h]
+	\centering
+	\caption{Cite commands}
+	\label{tab:Citations}
+\begin{small}
+  \begin{center}
+    \begin{tabular}{ll}
+	Command & Output \\ \hline
+	\verb|\cite{Downs1957}| & Downs(1957) \\
+	\verb|\cite{Downs1957, Stokes1963}| & Downs (1957); Stokes (1963) \\
+	\verb|\citep{Downs1957}| & (Downs, 1957) \\
+	\verb|\citeauthor{Downs1957}| & Downs \\
+	\verb|\citeyear{Downs1957}| & 1957 \\
+	\verb|\citep[p.~215]{Downs1957}|	 & (Downs, 1957, p. 215) \\ 
+	\verb|\citep[see][215]{Downs1957}| & (see Downs 1957, 215) \\ \hline
+	
+    \end{tabular}
+  \end{center}
+\end{small}
+\end{table}
+
+The use of brackets adds notes to the citations. One set of brackets adds text to the end of the cite while two sets of brackets sandwiches the citation between the two bits of text. Other cite commands can be found \href{http://merkel.zoneo.net/Latex/natbib.php}{here} if you need more flexibility.
+
+Let's go ahead and add some citations to your own documents!
