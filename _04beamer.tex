@@ -34,6 +34,8 @@ Right now, your presentation looks a bit boring. You can tweak the look of it by
 \end{document}
 \end{lstlisting}
 
+Note that \LaTeX, by default, adds navigation symbols in the bottom right corner of the slide. Since no one ever seems to use those, you should turn them off by adding \verb|\setbeamertemplate{navigation symbols}{}| to your preamble.
+
 
 \subsection{Frames}
 
@@ -130,4 +132,8 @@ The second result is unclear
 
 What we did here was open the \texttt{columns} environment and then begin and end one column at a time. For each column we also specified how much of the page it will take.
 
-\subsection{Appendix slides and references}
+\subsection{Appendix slides}
+
+You might want to include additional slides after your main ones. We can do that by using the \verb|\appendix| command. All sections after this declaration are separated from the main slides. This way the additional slides do not show up in the navigation bar. You can stop these extra slides from adding to your page count (in the bottom right corner on most themes) by using the \texttt{appendixnumberbeamer} package. If the package is not already part of your \LaTeX\ distribution, you can download it \href{http://www.ctan.org/pkg/appendixnumberbeamer}{here}.
+
+
