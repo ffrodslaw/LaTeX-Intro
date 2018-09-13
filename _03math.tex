@@ -153,20 +153,20 @@ At some point you may find yourself with the inevitable task of writing a matrix
 \begin{lstlisting}
 $$
 A =
-\begin{bmatrix*}
+\begin{bmatrix}
 	a_{11} & a_{12} \\
 	a_{21} & a_{22} \\
-\end{bmatrix*}
+\end{bmatrix}
 $$
 \end{lstlisting}
 
 And this gives you 
 $$
 A =
-\begin{bmatrix*}
+\begin{bmatrix}
 a_{11} & a_{12} \\
 a_{21} & a_{22} \\
-\end{bmatrix*}
+\end{bmatrix}
 $$
 
 The \texttt{b} in \texttt{bmatrix} refers to the brackets. You can also use parentheses. For instance
@@ -194,6 +194,8 @@ A =
 \end{pmatrix}
 $$
 \end{lstlisting}
+
+Besides brackets and parentheses, you can use the \texttt{matrix} environment for a plain matrix, \texttt{Bmatrix}  for a braces, \texttt{vmatrix} for vertical lines, and \texttt{smallmatrix} for a smaller matrix that can also be used in-line.
 
 \subsection{Theorems and proofs}
 
@@ -235,11 +237,11 @@ Left as an exercise to the reader.
 
 Table \ref{tab:fonts} shows some additional things you may want to use in math mode.
 
-\begin{table}[h]
+\begin{table}[h!]
 	\centering
 	\label{tab:fonts}
 	\caption{Fonts in math mode}
-\begin{small}
+\begin{footnotesize}
   \begin{center}
     \begin{tabular}{c c c}
       \hline
@@ -256,7 +258,7 @@ Command & Use & Example \\ \hline
       \hline
     \end{tabular}
   \end{center}
-\end{small}
+\end{footnotesize}
 \end{table}
 
 
